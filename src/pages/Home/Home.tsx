@@ -10,11 +10,11 @@ const Home: FC = () => {
   return (
     <div className={classes.parent}>
       <Toolbar />
-      <div className={classes.wrapper}>
-        <div className={classes.imagePortion}>
+      <div className={classes.wrapperFixed}>
+        <div className={classes.imagePortionFixed}>
           <img src={Image} className={classes.banner} />
         </div>
-        <div className={classes.textPortion}>
+        <div className={classes.textPortionFixed}>
           <h1 className={classes.landingText}>
             Your matching network for work
           </h1>

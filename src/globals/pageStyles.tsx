@@ -5,7 +5,7 @@ export const useStyles = makeStyles(theme => ({
   parent: {
     marginTop: 0,
     width: "100%",
-    height: "100vh",
+    minHeight: "100vh",
     backgroundColor: BalticSea,
     [theme.breakpoints.down("sm")]: {
       height: "auto",
@@ -13,7 +13,16 @@ export const useStyles = makeStyles(theme => ({
   },
   wrapper: {
     width: "100%",
-    height: "85%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    [theme.breakpoints.down("sm")]: {
+      height: "auto",
+    },
+  },
+  wrapperFixed: {
+    width: "100%",
+    height: "100vh",
     display: "flex",
     flexDirection: "row",
     [theme.breakpoints.down("sm")]: {
@@ -23,6 +32,17 @@ export const useStyles = makeStyles(theme => ({
   imagePortion: {
     width: "50%",
     height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  },
+  imagePortionFixed: {
+    width: "50%",
+    height: "85%",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -46,10 +66,11 @@ export const useStyles = makeStyles(theme => ({
     color: White,
     textAlign: "left",
     marginBottom: 30,
+    marginTop: 20,
   },
   engineersPortion: {
     width: "35%",
-    height: "100%",
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
     marginLeft: 20,
@@ -64,6 +85,22 @@ export const useStyles = makeStyles(theme => ({
   engineerTextPortion: {
     width: "65%",
     height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 50,
+    marginRight: 50,
+    [theme.breakpoints.down("md")]: {
+      marginLeft: 20,
+      marginRight: 20,
+      width: "100%",
+    },
+  },
+
+  textPortionFixed: {
+    width: "50%",
+    height: "85%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

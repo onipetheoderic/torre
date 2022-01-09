@@ -1,9 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
+import fetch from "unfetch";
+import useSWR from "swr";
 import { useStyles } from "../../globals/pageStyles";
 import Toolbar from "../../components/Toolbar/Toolbar";
 import HexagonContainer from "../../common/HexagonContainer";
 import Modal, { ModalModel } from "../../common/Modal";
-import { userDetails } from "./dummy";
+import { BASEURL } from "../../common/constant";
 
 const Engineers: FC = () => {
   const classes = useStyles();
@@ -36,6 +38,9 @@ const Engineers: FC = () => {
     setOpen(false);
   };
 
+  const fetcher = (url: any) => fetch(url).then(r => r.json());
+  const { data, error } = useSWR(`${BASEURL}/api/developers`, fetcher);
+
   const content: ModalModel = {
     name: currentUser.name,
     position: currentUser.position,
@@ -46,6 +51,8 @@ const Engineers: FC = () => {
     technologies: currentUser.technologies,
     related_experience: currentUser.related_experience,
   };
+
+  const users = data || [];
 
   return (
     <div className={classes.parent}>
@@ -79,25 +86,36 @@ const Engineers: FC = () => {
             Our List of Outstanding Engineers currently Available
           </h1>
           <div className={classes.engineersContainer}>
-            {userDetails.map(user => (
-              <HexagonContainer
-                image={user.picture}
-                name={user.name}
-                profession={user.position}
-                onClick={() =>
-                  handleOpen({
-                    name: user.name,
-                    position: user.position,
-                    picture: user.picture,
-                    recommendation: user.recommendation,
-                    skills_interest: user.skills_interest,
-                    proficient: user.proficient,
-                    technologies: user.technologies,
-                    related_experience: user.related_experience,
-                  })
-                }
-              />
-            ))}
+            {users.map(
+              (user: {
+                picture: string;
+                name: string | undefined;
+                position: string | undefined;
+                recommendation: any;
+                skills_interest: any;
+                proficient: any;
+                technologies: any;
+                related_experience: any;
+              }) => (
+                <HexagonContainer
+                  image={user.picture}
+                  name={user.name}
+                  profession={user.position}
+                  onClick={() =>
+                    handleOpen({
+                      name: user.name || "",
+                      position: user.position || "",
+                      picture: user.picture,
+                      recommendation: user.recommendation,
+                      skills_interest: user.skills_interest,
+                      proficient: user.proficient,
+                      technologies: user.technologies,
+                      related_experience: user.related_experience,
+                    })
+                  }
+                />
+              )
+            )}
           </div>
         </div>
       </div>
