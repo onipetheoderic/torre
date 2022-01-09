@@ -6,6 +6,7 @@ import Fade from "@material-ui/core/Fade";
 import Button from "./Button";
 import { Wattle, BalticSea } from "./Colors";
 import HexagonContainer from "./HexagonContainer";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export type experience = {
   position: string;
@@ -29,7 +30,7 @@ interface ModalProps {
   height?: string;
   title?: string;
   width?: string;
-  handleClose?: () => void;
+  handleClose: () => void;
   handleOpen?: () => void;
   open: boolean;
 }
@@ -60,6 +61,9 @@ export default function TransitionsModal({
       zIndex: 10000000000,
       borderRadius: 30,
       position: "relative",
+      [theme.breakpoints.down("md")]: {
+        width: "100%",
+      },
     },
     title: {
       fontSize: 18,
@@ -104,12 +108,24 @@ export default function TransitionsModal({
       alignItems: "center",
       justifyContent: "space-evenly",
       flexWrap: "wrap",
+      [theme.breakpoints.down("md")]: {
+        marginBottom: 30,
+      },
     },
     verticalAlign: {
       display: "flex",
       flexDirection: "column",
       paddingLeft: 20,
       paddingRight: 20,
+    },
+    iconContainer: {
+      position: "absolute",
+      top: 10,
+      right: 10,
+      cursor: "pointer",
+      [theme.breakpoints.down("md")]: {
+        top: 50,
+      },
     },
   }));
   const classes = useStyles();
@@ -131,6 +147,12 @@ export default function TransitionsModal({
       >
         <Fade in={open}>
           <div className={classes.paper}>
+            <div
+              className={classes.iconContainer}
+              onClick={() => handleClose()}
+            >
+              <HighlightOffIcon />
+            </div>
             <div className={classes.horizontalAlign}>
               <HexagonContainer image={content.picture} />
               <div>
