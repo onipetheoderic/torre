@@ -42,7 +42,7 @@ jobs:
 
           script: |
             cd ~/torre
-            git pull origin master
+            git pull origin main
             yarn
             yarn run build
             pm2 serve build 5200 --spa
